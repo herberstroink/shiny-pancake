@@ -1,0 +1,25 @@
+
+<html>
+<template id="sideBarTemplate">
+    <style >
+        .sidebar{
+            background-color: yellow;
+        }
+    </style>
+    <div class="sidebar">
+        <p>I am a sidebar!</p>
+    </div>
+</template>
+<script>
+    var importDoc = document.currentScript.ownerDocument;
+    var sideBarPrototype = Object.create(HTMLElement.prototype);
+    sideBarPrototype.createdCallback = function() {
+        var shadow = this.createShadowRoot();
+        var template = importDoc.querySelector('#sideBarTemplate');
+        shadow.appendChild(template.content.cloneNode(true));
+    };
+    document.registerElement("side-bar", {
+        prototype: sideBarPrototype
+    });
+</script>
+</html>
